@@ -58,6 +58,7 @@ public class WeaponController : MonoBehaviour
             _MaxAmmo = 0;
         }
         Debug.Log(weaponObject.weaponType +  " Fire at -> " + crosshair.GetTarget().gameObject.name + " deal damge -> " + _bulletDamage);
+        // send pullet prefab
         UpdateUI();
     }
     public void AddAmmo(int _amount){

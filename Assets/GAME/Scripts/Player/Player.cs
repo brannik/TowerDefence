@@ -29,17 +29,49 @@ public class Player : MonoBehaviour
     private void Start() {
         weaponController = gameObject.GetComponent<WeaponController>();
     }
-    private void Fire(InputAction.CallbackContext context){
-        //Debug.Log("Fire!!!");
-        weaponController.WeaponFire();
-    }
+    
     private void FixedUpdate() {
         UpdateUI();
     }
     // implement item/buff pickup
     // implement TakeDamageFromEnemy function
-
+    private void Fire(InputAction.CallbackContext context){
+        //Debug.Log("Fire!!!");
+        weaponController.WeaponFire();
+    }
     private void UpdateUI(){
 
     }
+    private void PlayerAddHealth(float _value){
+
+    }
+    private void PlayerAddArmor(float _value){
+
+    }
+    private void PlayerAddAmmo(int _value){
+
+    }
+    private void PlayerAddBuff(/* buff object ? */){
+
+    }
+    public void TakeDamage(){
+        // take damage from enemy
+    }
+    private void PickupItem(GameObject _itemToPick){
+        // pickup items here and redirect to representing function
+        if(_itemToPick.CompareTag("PickupItem")){
+            // pickup the item
+            // Destroy()
+        }
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if(true){
+            // if item can be picked up
+            PickupItem(other.gameObject);
+        }
+    }
+
 }
+
