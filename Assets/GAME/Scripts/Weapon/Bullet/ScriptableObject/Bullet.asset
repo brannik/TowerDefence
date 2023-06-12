@@ -17,4 +17,4 @@ MonoBehaviour:
   Damage: 20
   Range: 200
   Icon: {fileID: 0}
-  prefab: {fileID: 0}
+  prefab: {fileID: 5153656572860789373, guid: 4e002d55d5b15304fb7c8aa6bfac9075, type: 3}
