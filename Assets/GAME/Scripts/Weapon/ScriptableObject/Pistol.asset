@@ -15,9 +15,11 @@ MonoBehaviour:
   ID: 0
   Name: Pistol
   weaponType: 4
-  bulletController: {fileID: 5514308534163154352, guid: 4e002d55d5b15304fb7c8aa6bfac9075,
-    type: 3}
   MaxAmmo: 40
   MagazineAmmo: 6
   Icon: {fileID: 0}
-  prefab: {fileID: 0}
+  prefab: {fileID: 5338970287582616031, guid: 9e5c7f8e049bacb45a0f3d296ce2cca5, type: 3}
+  BulletsPerSecond: 1
+  BulletSpeed: 10
+  BulletRange: 30
+  BulletDamage: 10

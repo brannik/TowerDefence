@@ -13,33 +13,36 @@ public class Player : MonoBehaviour
     [SerializeField] public float MaxHealth = 100f;
     [SerializeField] public int Armor = 0;
     [SerializeField] public int MaxArmor = 200;
+    
     [Header("Buffs")]
     [SerializeField] public string[] playerBuffs; // create class Buff instead of string and make it List<Buff> playerBuffs
-    [SerializeField] public InputAction action;
-    private WeaponController weaponController; // gain access to weapun
+    
+    [Header("Weapon")]
+    [SerializeField] public  WeaponController EquippedWeapon;
+    [SerializeField] public GameObject WeaponPosition;
+    [SerializeField] public GameObject WeaponUI;
+     // gain access to weapun
 
-    private void OnEnable() {
-        action.Enable();
-        action.performed += Fire;
-    }
-    private void OnDisable() {
-        action.performed -= Fire;
-        action.Disable();
-    }
+    
     private void Start() {
-        weaponController = gameObject.GetComponent<WeaponController>();
+        EquipWeapon();
     }
-    private void Fire(InputAction.CallbackContext context){
-        //Debug.Log("Fire!!!");
-        weaponController.WeaponFire();
-    }
+    
     private void FixedUpdate() {
         UpdateUI();
+        
     }
     // implement item/buff pickup
     // implement TakeDamageFromEnemy function
 
     private void UpdateUI(){
 
+    }
+    private void EquipWeapon(){
+        if(EquippedWeapon != null){
+            var a = Instantiate(EquippedWeapon.weaponObject.prefab,WeaponPosition.transform.position,WeaponPosition.transform.rotation);
+            a.transform.parent = WeaponPosition.transform;
+            a.GetComponent<WeaponController>().SetUI(WeaponUI);
+        }
     }
 }

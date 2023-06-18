@@ -12,16 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b309a9ef0e65764f929f98b22daf96c, type: 3}
   m_Name: New Crosshair
   m_EditorClassIdentifier: 
-  sprite: {fileID: 7482667652216324306, guid: b03c7f328013ba149bebbf21d2164804, type: 3}
+  ID: 0
+  sprite: {fileID: -2413806693520163455, guid: 4924136d09cbcc84daf4783cdee937aa, type: 3}
   normalSize: {x: 30, y: 30}
   minSize: {x: 20, y: 20}
   maxSize: {x: 40, y: 40}
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
-  defaultTag: 
+  defaultTag: Default
   defaultSize: {x: 30, y: 30}
   enemyColor: {r: 1, g: 0, b: 0, a: 1}
-  enemyTag: 
+  enemyTag: Enemy
   enemySize: {x: 20, y: 20}
   friendlyColor: {r: 0, g: 1, b: 0, a: 1}
-  friendlyTag: 
+  friendlyTag: Friend
   friendlySize: {x: 40, y: 40}

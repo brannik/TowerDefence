@@ -1,54 +1,66 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 // attached to weapon prefab
 public class WeaponController : MonoBehaviour
 {
     // controll weapon behaviour - add/remove dmg, fire projectile , add ammo or remove ammo on fire etc
-    [Header("Equipped Weapon UI")]
-    [SerializeField] public GameObject WeaponUI;
     [SerializeField] public WeaponObject weaponObject;
-    private CrosshairController crosshair;
-    
-
+    [SerializeField] public InputAction action;
+    [Header("Animation")]
+    [SerializeField] public ParticleSystem MuzzleFlash;
+    [SerializeField] public GameObject HitEffect;
     // weapon data
     private string _Name;
     private int _MaxAmmo = 0;
     private int _MagazineAmmo = 0;
-    private float _bulletRange = 0;
-    private float _bulletDamage = 0;
-    private Sprite _bulletIcon;
-    private 
-    void Start()
-    {
-        crosshair = GameObject.FindAnyObjectByType<CrosshairController>();
+    private GameObject WeaponUI;
+
+    private Camera _camera;
+    private Ray _ray;
+    public RaycastHit _hit;
+    private GameObject _target;
+
+    private void OnEnable() {
+        action.Enable();
+        action.performed += Fire;
+    }
+    private void OnDisable() {
+        action.performed -= Fire;
+        action.Disable();
+    }
+    private void Fire(InputAction.CallbackContext context){
+        Debug.Log("Fire!!!");
+        if(_MagazineAmmo > 0 && _MaxAmmo > 0){
+            Fire();  
+        }
+        
+    }
+    private void Start() {
+        _camera = Camera.main;
+    }
+    private void FixedUpdate() {
+        // rotate weapon to target
         _Name = weaponObject.Name;
         _MaxAmmo = weaponObject.MaxAmmo;
         _MagazineAmmo = weaponObject.MagazineAmmo;
-        _bulletRange = weaponObject.bulletController.bulletObject.Range;
-        _bulletDamage = weaponObject.bulletController.bulletObject.Damage;
-        _bulletIcon = weaponObject.bulletController.bulletObject.Icon;
+        
+        _ray = _camera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        if (Physics.Raycast(_ray, out _hit))
+        {
+            _target = _hit.transform.gameObject;  
+        } 
+
         UpdateUI();
+        RotateWeapon();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    public void WeaponFire(){
-        // bullet prefab addforce
-        if(crosshair.CanFire() == true) {
-            if(_MagazineAmmo > 0 || _MaxAmmo > 0){
-                _MagazineAmmo --;
-                Fire();
-            }
-            
-        }
-            
-    }
     private void Fire(){ 
+        // ajust fire rates
+        int _bPerSec = weaponObject.BulletsPerSecond;
+
         if(_MagazineAmmo == 0 && _MaxAmmo >= weaponObject.MagazineAmmo){
             _MagazineAmmo = weaponObject.MagazineAmmo;
             _MaxAmmo -= _MagazineAmmo;
@@ -57,7 +69,7 @@ public class WeaponController : MonoBehaviour
             _MagazineAmmo = _MaxAmmo;
             _MaxAmmo = 0;
         }
-        Debug.Log(weaponObject.weaponType +  " Fire at -> " + crosshair.GetTarget().gameObject.name + " deal damge -> " + _bulletDamage);
+        SendBulletAndDoDamage();
         UpdateUI();
     }
     public void AddAmmo(int _amount){
@@ -66,9 +78,11 @@ public class WeaponController : MonoBehaviour
             // add to total amount ammo
             if((_MaxAmmo + _amount) >= weaponObject.MaxAmmo){
                 _MaxAmmo += weaponObject.MaxAmmo - _amount;
+                UpdateUI();
                 return;
             }else{
                 _MaxAmmo += _amount;
+                UpdateUI();
                 return;
             }
         }
@@ -76,9 +90,11 @@ public class WeaponController : MonoBehaviour
             // add to magazine ammo
             if((_MagazineAmmo + _amount) >= weaponObject.MagazineAmmo){
                 _MagazineAmmo += weaponObject.MagazineAmmo - _amount;
+                UpdateUI();
                 return;
             }else{
                 _MagazineAmmo += _amount;
+                UpdateUI();
                 return;
             }
         }
@@ -90,34 +106,48 @@ public class WeaponController : MonoBehaviour
                 _MaxAmmo += weaponObject.MaxAmmo - _amount;
                 if((_MagazineAmmo + leftAmmo) >= weaponObject.MagazineAmmo){
                     _MagazineAmmo += weaponObject.MagazineAmmo - leftAmmo;
+                    UpdateUI();
                     return;
                 }else{
                     _MagazineAmmo += leftAmmo;
+                    UpdateUI();
                     return;
                 }
             }else{
                 _MaxAmmo += _amount;
+                UpdateUI();
                 return;
             }
         }
+        
     }
-    public void ModDamage(float _amount,bool Add){
-        // modify damage here
-        if(Add){
-            _bulletDamage += _amount;
-        }else{
-            _bulletDamage -= _amount;
+    public void ModDamage(float _value){
+
+    }
+    public void ModRange(float _value){
+
+    }
+    public void ModSpeed(float _value){
+
+    }
+    public void SetUI(GameObject _ui){
+        WeaponUI = _ui;
+    }
+    private void SendBulletAndDoDamage(){
+        // raycast to crosshair target
+        if(_target != null){
+            Debug.Log("Second -> " + _target.gameObject.name + " deal damage " + weaponObject.BulletDamage);
+            // do damage to target
+            // animate muzzleflash and hit effect
+            MuzzleFlash.Play();
         }
+        
     }
-    public void ModRange(float _amount,bool Add){
-        // modify range here
-        if(Add){
-            _bulletRange += _amount;
-        }else{
-            _bulletRange -= _amount;
-        }
-    }
+    
     private void UpdateUI(){
         // display the ammunitions, icon, damage, range, ammo type and name
+    }
+    private void RotateWeapon(){
+        // rotate weapon with camera
     }
 }
