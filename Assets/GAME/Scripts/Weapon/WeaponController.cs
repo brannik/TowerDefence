@@ -139,6 +139,7 @@ public class WeaponController : MonoBehaviour
             Debug.Log("Second -> " + _target.gameObject.name + " deal damage " + weaponObject.BulletDamage);
             // do damage to target
             // animate muzzleflash and hit effect
+            //pvar Enemy = _target.gameObject.GetComponentInChildren<Enemy>();
             MuzzleFlash.Play();
         }
         
