@@ -15,6 +15,11 @@ MonoBehaviour:
   ID: 0
   Name: Pistol
   weaponType: 4
+<<<<<<< HEAD
+=======
+  bulletController: {fileID: 25483282436631539, guid: 4e002d55d5b15304fb7c8aa6bfac9075,
+    type: 3}
+>>>>>>> 8b0b66e25e288b65015ebba9c17ec809e7a5ecc4
   MaxAmmo: 40
   MagazineAmmo: 6
   Icon: {fileID: 0}

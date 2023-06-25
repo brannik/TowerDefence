@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 560bf8533318b604d8ca9f01698afd4d
+=======
+<<<<<<<< HEAD:Assets/LowPolyWeapons_LITE/Materials.meta
+guid: 953658637afe15444bb47c6cc09fab1f
+========
+guid: a3ad9a224c5719f418474893987d01a9
+>>>>>>>> 8b0b66e25e288b65015ebba9c17ec809e7a5ecc4:Assets/GAME/Prefabs.meta
+>>>>>>> 8b0b66e25e288b65015ebba9c17ec809e7a5ecc4
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

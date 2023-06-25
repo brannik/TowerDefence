@@ -69,7 +69,12 @@ public class WeaponController : MonoBehaviour
             _MagazineAmmo = _MaxAmmo;
             _MaxAmmo = 0;
         }
+<<<<<<< HEAD
         SendBulletAndDoDamage();
+=======
+        Debug.Log(weaponObject.weaponType +  " Fire at -> " + crosshair.GetTarget().gameObject.name + " deal damge -> " + _bulletDamage);
+        // send pullet prefab
+>>>>>>> 8b0b66e25e288b65015ebba9c17ec809e7a5ecc4
         UpdateUI();
     }
     public void AddAmmo(int _amount){

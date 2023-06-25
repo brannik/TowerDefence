@@ -37,6 +37,7 @@ public class CrosshairController : MonoBehaviour
         UpdateCrosshairUI();     
         UpdateTargetInfo();
     }
+    
 
     private void UpdateCrosshairUI(){
         _image.sprite = crosshair.sprite;
